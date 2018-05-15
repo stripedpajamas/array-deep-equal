@@ -1,20 +1,20 @@
 const test = require('ava')
-const compare = require('./')
+const compare = require('../compareAsync')
 
 test('arrays not equal', t => {
-  t.false(compare(a, c))
+  return compare(a, c).then(result => t.false(result))
 })
 
 test('arrays equal', t => {
-  t.true(compare(a, b))
+  return compare(a, b).then(result => t.true(result))
 })
 
 test('deeper arrays equal', t => {
-  t.true(compare(arr1, arr2))
+  return compare(arr1, arr2).then(result => t.true(result))
 })
 
 test('deeper not equal because different orders', t => {
-  t.false(compare(arr1, arr3))
+  return compare(arr1, arr3).then(result => t.false(result))
 })
 
 const a = [1, 2, 'test', { a: '1' }, ['five', 'six', { hi: 'world' }]]
